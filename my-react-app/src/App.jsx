@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Events from './components/Events';
+import EventDetails from './components/EventDetails';
 import './App.css';
 
 function App() {
@@ -18,13 +20,18 @@ function App() {
   };
 
   return (
-    <div className="app">
-      {isLoggedIn ? (
-        <Events username={username} onLogout={handleLogout} />
-      ) : (
-        <Login onLogin={handleLogin} />
-      )}
-    </div>
+    <Router>
+      <div className="app">
+        {isLoggedIn ? (
+          <Routes>
+            <Route path="/" element={<Events username={username} onLogout={handleLogout} />} />
+            <Route path="/event/:eventId" element={<EventDetails />} />
+          </Routes>
+        ) : (
+          <Login onLogin={handleLogin} />
+        )}
+      </div>
+    </Router>
   );
 }
 

@@ -1,88 +1,56 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Events.css';
 
 const Events = ({ username, onLogout }) => {
-  const [activeFilter, setActiveFilter] = useState('all');
-  
-  // Sample events data - in a real app, this would come from an API or database
-  const events = [
-    {
-      id: 1,
-      title: 'Web Development Workshop',
-      date: 'May 15, 2023',
-      image: 'https://via.placeholder.com/300x200',
-      category: 'workshop',
-      location: 'Online',
-      time: '10:00 AM - 2:00 PM'
-    },
-    {
-      id: 2,
-      title: 'Mobile App Development',
-      date: 'June 3, 2023',
-      image: 'https://via.placeholder.com/300x200',
-      category: 'course',
-      location: 'YouCode Campus',
-      time: '9:00 AM - 5:00 PM'
-    },
-    {
-      id: 3,
-      title: 'UI/UX Design Principles',
-      date: 'July 12, 2023',
-      image: 'https://via.placeholder.com/300x200',
-      category: 'workshop',
-      location: 'Online',
-      time: '1:00 PM - 4:00 PM'
-    },
-    {
-      id: 4,
-      title: 'Data Science Fundamentals',
-      date: 'August 5, 2023',
-      image: 'https://via.placeholder.com/300x200',
-      category: 'course',
-      location: 'YouCode Campus',
-      time: '10:00 AM - 3:00 PM'
-    },
-    {
-      id: 5,
-      title: 'Cloud Computing Basics',
-      date: 'September 10, 2023',
-      image: 'https://via.placeholder.com/300x200',
-      category: 'workshop',
-      location: 'Online',
-      time: '11:00 AM - 2:00 PM'
-    },
-    {
-      id: 6,
-      title: 'Cybersecurity Essentials',
-      date: 'October 22, 2023',
-      image: 'https://via.placeholder.com/300x200',
-      category: 'course',
-      location: 'YouCode Campus',
-      time: '9:00 AM - 4:00 PM'
-    },
-    {
-      id: 7,
-      title: 'React Advanced Techniques',
-      date: 'November 5, 2023',
-      image: 'https://via.placeholder.com/300x200',
-      category: 'workshop',
-      location: 'Online',
-      time: '1:00 PM - 5:00 PM'
-    },
-    {
-      id: 8,
-      title: 'Python for Data Analysis',
-      date: 'December 10, 2023',
-      image: 'https://via.placeholder.com/300x200',
-      category: 'course',
-      location: 'YouCode Campus',
-      time: '10:00 AM - 3:00 PM'
-    }
-  ];
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const filteredEvents = activeFilter === 'all' 
-    ? events 
-    : events.filter(event => event.category === activeFilter);
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/api/events');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log('API Response:', data); // Debug log
+
+        if (data && data.events_results) {
+          setEvents(data.events_results);
+        } else {
+          setError('No events found in the response');
+        }
+      } catch (err) {
+        console.error('API Error:', err); // Debug log
+        setError(`Error: ${err.message}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  const handleEventClick = (event) => {
+    // Store the event data in localStorage for the details page
+    localStorage.setItem('currentEvent', JSON.stringify(event));
+    // Navigate to the event details page
+    navigate(`/event/${event.title.replace(/\s+/g, '-').toLowerCase()}`);
+  };
+
+  if (loading) return <div className="loading">Loading events...</div>;
+  if (error) return (
+    <div className="error">
+      <h2>Error Loading Events</h2>
+      <p>{error}</p>
+      <p>Please try again later or contact support if the problem persists.</p>
+    </div>
+  );
 
   return (
     <div className="events-container">
@@ -96,49 +64,22 @@ const Events = ({ username, onLogout }) => {
       
       <main className="events-content">
         <div className="events-header-section">
-          <h2 className="featured-events-title">Featured Events</h2>
-          <div className="events-filters">
-            <button 
-              className={`filter-button ${activeFilter === 'all' ? 'active' : ''}`}
-              onClick={() => setActiveFilter('all')}
-            >
-              All Events
-            </button>
-            <button 
-              className={`filter-button ${activeFilter === 'workshop' ? 'active' : ''}`}
-              onClick={() => setActiveFilter('workshop')}
-            >
-              Workshops
-            </button>
-            <button 
-              className={`filter-button ${activeFilter === 'course' ? 'active' : ''}`}
-              onClick={() => setActiveFilter('course')}
-            >
-              Courses
-            </button>
-          </div>
+          <h2 className="featured-events-title">Featured Events in Vancouver</h2>
         </div>
         
         <div className="events-grid">
-          {filteredEvents.map(event => (
-            <div key={event.id} className="event-card">
-              <div className="event-image">
-                <img src={event.image} alt={event.title} />
-                <div className="event-category">{event.category}</div>
-              </div>
-              <div className="event-details">
-                <h3 className="event-title">{event.title}</h3>
-                <p className="event-date">{event.date}</p>
-                <div className="event-info">
-                  <p className="event-location">
-                    <span className="info-icon">📍</span> {event.location}
-                  </p>
-                  <p className="event-time">
-                    <span className="info-icon">⏱️</span> {event.time}
-                  </p>
-                </div>
-                <button className="event-button">View Details</button>
-              </div>
+          {events.map((event, index) => (
+            <div key={index} className="event-card" onClick={() => handleEventClick(event)}>
+              <h3>{event.title}</h3>
+              {event.thumbnail && (
+                <img src={event.thumbnail} alt={event.title} className="event-image" />
+              )}
+              <p className="event-date">{event.date?.when}</p>
+              <p className="event-location">{event.address}</p>
+              <p className="event-description">{event.description}</p>
+              <button className="event-link">
+                Learn More
+              </button>
             </div>
           ))}
         </div>

@@ -1,0 +1,127 @@
+.event-details-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  margin-bottom: 2rem;
+  transition: color 0.3s;
+}
+
+.back-button:hover {
+  color: #0056b3;
+}
+
+.event-details-content {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.event-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.event-header h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.event-image {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 8px;
+  margin: 0 auto;
+  display: block;
+}
+
+.event-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.event-section {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.event-section h2 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.event-date, .event-location {
+  color: #666;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.event-description {
+  color: #444;
+  line-height: 1.6;
+  margin-top: 1rem;
+}
+
+.clothing-recommendations {
+  display: grid;
+  gap: 1rem;
+}
+
+.recommendation-category {
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-category h3 {
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.recommendation-category p {
+  color: #666;
+  line-height: 1.4;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+}
+
+.error {
+  color: #dc3545;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .event-info {
+    grid-template-columns: 1fr;
+  }
+  
+  .event-details-container {
+    padding: 1rem;
+  }
+  
+  .event-details-content {
+    padding: 1rem;
+  }
+} 
