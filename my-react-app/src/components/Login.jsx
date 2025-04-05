@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Login.css';
+// import { useNavigate } from 'react-router-dom';
 
 const Login = ({ onLogin }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -25,10 +26,34 @@ const Login = ({ onLogin }) => {
       return;
     }
     
-    // In a real app, you would validate credentials with a backend
-    // For this demo, we'll just pass the username to the parent component
+
     onLogin({ username: formData.username });
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setError('');
+  
+  //   if (!formData.username || !formData.password) {
+  //     setError('Please fill in all required fields');
+  //     return;
+  //   }
+  
+  //   if (!isLogin && formData.password !== formData.confirmPassword) {
+  //     setError('Passwords do not match');
+  //     return;
+  //   }
+  
+  //   if (isLogin) {
+  //     onLogin({ username: formData.username });
+  //     navigate('/events');
+  //   } else {
+  //     // Don't call onLogin yet — go to profile first
+  //     navigate('/profile', { state: { username: formData.username } });
+  //   }
+  // };
+  
+
 
   const handleChange = (e) => {
     setFormData({
