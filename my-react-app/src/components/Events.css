@@ -400,4 +400,6 @@
   font-weight: 500;
   color: #2c3e50;
   font-size: 1.1rem;
-} 
+}
+
+/* console.log('Username from state:', location.state?.username);  */
