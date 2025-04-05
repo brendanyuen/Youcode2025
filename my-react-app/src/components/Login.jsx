@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
-const Login = ({ onLogin }) => {
+const Login = () => {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     username: '',
@@ -25,9 +27,15 @@ const Login = ({ onLogin }) => {
       return;
     }
     
-    // In a real app, you would validate credentials with a backend
-    // For this demo, we'll just pass the username to the parent component
-    onLogin({ username: formData.username });
+    if (isLogin) {
+      // Handle login logic here
+      console.log('Login:', formData);
+      navigate('/events');
+    } else {
+      // Handle account creation and navigate to profile setup
+      console.log('Create Account:', formData);
+      navigate('/profile-setup', { state: { username: formData.username } });
+    }
   };
 
   const handleChange = (e) => {
@@ -82,7 +90,7 @@ const Login = ({ onLogin }) => {
                   required
                 />
               </div>
-
+              
               <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input
@@ -95,7 +103,7 @@ const Login = ({ onLogin }) => {
                   required
                 />
               </div>
-
+              
               {!isLogin && (
                 <div className="form-group">
                   <label htmlFor="confirmPassword">Confirm Password</label>
@@ -110,7 +118,7 @@ const Login = ({ onLogin }) => {
                   />
                 </div>
               )}
-
+              
               <button type="submit" className="submit-button">
                 {isLogin ? 'Login' : 'Create Account'}
               </button>
