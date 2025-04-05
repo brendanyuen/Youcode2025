@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.get('/api/events', async (req, res) => {
   try {
-    const { type = '', city = 'Vancouver', date = '' } = req.query;
+    const { type = 'Outdoor', city = 'Vancouver', date = '' } = req.query;
     
     // Construct the query string
     let query = '';
