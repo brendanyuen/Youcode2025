@@ -79,6 +79,11 @@ const Events = ({ username, onLogout }) => {
     navigate(`/event/${event.title.replace(/\s+/g, '-').toLowerCase()}`);
   };
 
+  const handleLogout = () => {
+    // In a real app, you would clear any auth tokens or user data here
+    navigate('/login'); // Navigate to the login page
+  };
+
   if (loading) return <div className="loading">Loading events...</div>;
   if (error) return (
     <div className="error">
@@ -94,7 +99,7 @@ const Events = ({ username, onLogout }) => {
         <h1 className="events-title">YouCode Events</h1>
         <div className="user-info">
           <span className="user-name">Welcome, {username}</span>
-          <button className="logout-button" onClick={onLogout}>Logout</button>
+          <button className="logout-button" onClick={handleLogout}>Logout</button>
         </div>
       </header>
 
