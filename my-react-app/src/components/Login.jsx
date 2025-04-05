@@ -1,18 +1,33 @@
 import React, { useState } from 'react';
 import './Login.css';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     username: '',
     password: '',
     confirmPassword: ''
   });
+  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
+    setError('');
+    
+    // Basic validation
+    if (!formData.username || !formData.password) {
+      setError('Please fill in all required fields');
+      return;
+    }
+    
+    if (!isLogin && formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+    
+    // In a real app, you would validate credentials with a backend
+    // For this demo, we'll just pass the username to the parent component
+    onLogin({ username: formData.username });
   };
 
   const handleChange = (e) => {
@@ -51,6 +66,8 @@ const Login = () => {
                 Create Account
               </button>
             </div>
+
+            {error && <div className="error-message">{error}</div>}
 
             <form onSubmit={handleSubmit} className="login-form">
               <div className="form-group">
