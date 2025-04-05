@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
-// import { useNavigate } from 'react-router-dom';
 
-const Login = ({ onLogin }) => {
+const Login = () => {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     username: '',
@@ -26,34 +27,16 @@ const Login = ({ onLogin }) => {
       return;
     }
     
-
-    onLogin({ username: formData.username });
+    if (isLogin) {
+      // Handle login logic here
+      console.log('Login:', formData);
+      navigate('/events');
+    } else {
+      // Handle account creation and navigate to profile setup
+      console.log('Create Account:', formData);
+      navigate('/profile-setup', { state: { username: formData.username } });
+    }
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setError('');
-  
-  //   if (!formData.username || !formData.password) {
-  //     setError('Please fill in all required fields');
-  //     return;
-  //   }
-  
-  //   if (!isLogin && formData.password !== formData.confirmPassword) {
-  //     setError('Passwords do not match');
-  //     return;
-  //   }
-  
-  //   if (isLogin) {
-  //     onLogin({ username: formData.username });
-  //     navigate('/events');
-  //   } else {
-  //     // Don't call onLogin yet — go to profile first
-  //     navigate('/profile', { state: { username: formData.username } });
-  //   }
-  // };
-  
-
 
   const handleChange = (e) => {
     setFormData({
@@ -107,7 +90,7 @@ const Login = ({ onLogin }) => {
                   required
                 />
               </div>
-
+              
               <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input
@@ -120,7 +103,7 @@ const Login = ({ onLogin }) => {
                   required
                 />
               </div>
-
+              
               {!isLogin && (
                 <div className="form-group">
                   <label htmlFor="confirmPassword">Confirm Password</label>
@@ -135,7 +118,7 @@ const Login = ({ onLogin }) => {
                   />
                 </div>
               )}
-
+              
               <button type="submit" className="submit-button">
                 {isLogin ? 'Login' : 'Create Account'}
               </button>
