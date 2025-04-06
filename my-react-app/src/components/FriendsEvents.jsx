@@ -7,9 +7,25 @@ const FriendsEvents = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const username = location.state?.username || 'Guest';
+  const friendInterests = location.state?.profileData?.activities || [];
+  
 
   const handleLogout = () => {
     navigate('/login');
+  };
+
+  const getActivityLabel = (id) => {
+    const activityMap = {
+      'hiking': 'Hiking',
+      'swimming': 'Swimming',
+      'kayaking': 'Kayaking',
+      'beach': 'Going to the Beach',
+      'cycling': 'Cycling',
+      'camping': 'Camping',
+      'rock-climbing': 'Rock Climbing',
+      'fishing': 'Fishing'
+    };
+    return activityMap[id] || id;
   };
 
   // Hardcoded data for friends and events
@@ -21,14 +37,16 @@ const FriendsEvents = () => {
         { title: 'Concert at the Park', date: '2025-04-10' },
         { title: 'Art Exhibition', date: '2025-04-15' },
       ],
+      interests: [...new Set([...friendInterests, 'hiking'])],
     },
-    {
+    { 
       name: 'Jane Smith',
       image: 'https://www.bluemountain.ca/-/media/blue-mountain/2400x1350/plan-your-trip/snow-school/multi-week-programs/fy25/heros/bmr-fy25-multi-week-womans-alpine-ski.jpg?w=480&rev=9cfe61c46fd647be9bb98aba23f7cb68&hash=29832E106108C07B7EE92A8F3C80E58F',
       events: [
         { title: 'Tech Conference', date: '2025-04-12' },
         { title: 'Music Festival', date: '2025-04-20' },
       ],
+      interests: [...new Set([...friendInterests, 'Skiing'])],
     },
     {
       name: 'Alice Johnson',
@@ -37,6 +55,7 @@ const FriendsEvents = () => {
         { title: 'Food Festival', date: '2025-04-14' },
         { title: 'Coding Bootcamp', date: '2025-04-18' },
       ],
+      interests: [...new Set([...friendInterests, 'Surfing'])],
     },
   ];
 
@@ -79,6 +98,16 @@ const FriendsEvents = () => {
                 />
                 <h3 className="friend-name">{friend.name}</h3>
               </div>
+              <div className="profile-interests">
+            <h3>Interests</h3>
+            <div className="interests-grid">
+              {friend.interests && friend.interests.map(activity => (
+                <span key={activity} className="interest-tag">
+                  {getActivityLabel(activity)}
+                </span>
+              ))}
+            </div>
+          </div>
               <div className="friend-events">
                 <h4>Events:</h4>
                 {friend.events.map((event, eventIndex) => (

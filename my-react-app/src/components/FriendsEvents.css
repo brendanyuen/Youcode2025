@@ -4,6 +4,7 @@
     background-color: #f8f9fa;
     display: flex;
     flex-direction: column;
+    margin-top: 150px;
 }
 
 .friends-events-header {
@@ -45,9 +46,9 @@
     flex: 1;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem;
     width: 100%;
-    margin-top: 120px; /* Increased to account for both header and tab navigation */
+    margin-top: 0px; /* Increased to account for both header and tab navigation */
 }
 
 .back-button {
@@ -164,7 +165,7 @@
 }
 
 .join-event-button {
-    background-color: #007bff;
+    background-color: #000;
     color: white;
 }
 
@@ -174,7 +175,7 @@
 }
 
 .join-event-button:hover {
-    background-color: #0056b3;
+    background-color: #333;
     transform: translateY(-1px);
 }
 
