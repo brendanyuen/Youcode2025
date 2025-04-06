@@ -56,7 +56,7 @@ const Profile = () => {
         <div className="profile-card">
           <div className="profile-header-section">
             <img 
-              src="https://via.placeholder.com/150" 
+              src="https://media.licdn.com/dms/image/v2/D560BAQHPlkmRLhVzng/company-logo_200_200/B56ZWR3jj3HoAI-/0/1741909015016/youcode_ubc_logo?e=2147483647&v=beta&t=j9g9iiGpNNPziAEu9ArKdYKicRoDUBoZbtmKNE01UdA" 
               alt="Profile" 
               className="profile-image"
             />
