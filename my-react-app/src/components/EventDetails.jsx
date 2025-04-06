@@ -11,6 +11,8 @@ const EventDetails = () => {
   const username = location.state?.username || 'Guest';
   const [activityType, setActivityType] = useState('default');
   const [isAnalyzing, setIsAnalyzing] = useState(true);
+  const [isAttending, setIsAttending] = useState(false);
+  const [profileData, setProfileData] = useState(location.state?.profileData || {});
 
   useEffect(() => {
     const determineActivityType = async () => {
@@ -23,7 +25,67 @@ const EventDetails = () => {
     };
 
     determineActivityType();
-  }, [event]);
+
+    // Check if user is already attending this event
+    if (profileData.attendingEvents) {
+      setIsAttending(profileData.attendingEvents.some(e => e.id === event.id));
+    }
+  }, [event, profileData]);
+
+  const handleAttendEvent = async () => {
+    try {
+      // Update local state
+      const updatedProfileData = {
+        ...profileData,
+        attendingEvents: [
+          ...(profileData.attendingEvents || []),
+          {
+            id: event.id,
+            title: event.title,
+            date: event.date,
+            location: event.address,
+            type: activityType
+          }
+        ]
+      };
+      setProfileData(updatedProfileData);
+      setIsAttending(true);
+
+      // Update profile in localStorage
+      const storedProfiles = JSON.parse(localStorage.getItem('profiles') || '{}');
+      storedProfiles[username] = updatedProfileData;
+      localStorage.setItem('profiles', JSON.stringify(storedProfiles));
+
+      // Show success message
+      alert('You are now attending this event!');
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      alert('Failed to update your attendance. Please try again.');
+    }
+  };
+
+  const handleUnattendEvent = async () => {
+    try {
+      // Update local state
+      const updatedProfileData = {
+        ...profileData,
+        attendingEvents: (profileData.attendingEvents || []).filter(e => e.id !== event.id)
+      };
+      setProfileData(updatedProfileData);
+      setIsAttending(false);
+
+      // Update profile in localStorage
+      const storedProfiles = JSON.parse(localStorage.getItem('profiles') || '{}');
+      storedProfiles[username] = updatedProfileData;
+      localStorage.setItem('profiles', JSON.stringify(storedProfiles));
+
+      // Show success message
+      alert('You are no longer attending this event.');
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      alert('Failed to update your attendance. Please try again.');
+    }
+  };
 
   // Define recommended gear for different event types
   const recommendedGear = {
@@ -276,6 +338,14 @@ const EventDetails = () => {
               <a href={renderProperty(event.website)} target="_blank" rel="noopener noreferrer" className="register-button">
                 Register Now
               </a>
+            )}
+            {username !== 'Guest' && (
+              <button 
+                className={`attend-button ${isAttending ? 'attending' : ''}`}
+                onClick={isAttending ? handleUnattendEvent : handleAttendEvent}
+              >
+                {isAttending ? 'Attending ✓' : 'Attend Event'}
+              </button>
             )}
             <button className="share-button">Share Event</button>
           </div>
