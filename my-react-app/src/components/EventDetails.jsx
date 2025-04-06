@@ -67,11 +67,20 @@ const EventDetails = () => {
 
   return (
     <div className="event-details-page">
+      <header className="event-details-header">
+        <div className="header-top">
+          <div className="header-left">
+            <h1 className="event-details-title">Event Details</h1>
+          </div>
+          <div className="user-info">
+            <span className="user-name">Welcome, {username}</span>
+            <button className="logout-button" onClick={handleLogout}>Logout</button>
+          </div>
+        </div>
+        <TabNavigation />
+      </header>
+      
       <div className="event-details-container">
-        <button className="back-button" onClick={() => navigate('/events')}>
-          ← Back to Events
-        </button>
-        
         <div className="event-details-content">
           <h1 className="event-title">{renderProperty(event.title)}</h1>
           

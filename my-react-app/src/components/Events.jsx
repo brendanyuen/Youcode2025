@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import TabNavigation from './TabNavigation';
 import './Events.css';
 
 const Events = () => {
@@ -84,7 +85,14 @@ const Events = () => {
   };
 
   const handleFriendsEventsClick = () => {
-    navigate('/friends-events');
+    navigate('/friends-events', { 
+      state: { 
+        username,
+        profileData: location.state?.profileData || {},
+        // Preserve any other state that might be present
+        ...location.state
+      } 
+    });
   };
 
   if (loading) return <div className="loading">Loading events...</div>;
@@ -99,18 +107,23 @@ const Events = () => {
   return (
     <div className="events-page">
       <header className="events-header">
-        <h1 className="events-title">YouCode Events</h1>
-        <div className="user-info">
-          <span className="user-name">Welcome, {username}</span>
-          <button className="logout-button" onClick={handleLogout}>Logout</button>
+        <div className="header-top">
+          <div className="header-left">
+            <h1 className="events-title">YouCode Events</h1>
+          </div>
+          <div className="user-info">
+            <span className="user-name">Welcome, {username}</span>
+            <button className="logout-button" onClick={handleLogout}>Logout</button>
+            <button 
+              className="friends-events-button" 
+              onClick={handleFriendsEventsClick}>
+              View Friends' Events
+            </button>
+          </div>
         </div>
-        <button 
-          className="friends-events-button" 
-          onClick={handleFriendsEventsClick}>
-          View Friends' Events
-        </button>
+        <TabNavigation />
       </header>
-
+      
       <div className="events-section">
         <div className="weather-info">
           <div className="weather-main">

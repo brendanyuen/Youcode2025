@@ -1,31 +1,69 @@
 .event-details-page {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
 }
 
-.event-details-container {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
+.event-details-header {
+  background-color: #000;
+  color: white;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-left: 2rem;
+}
+
+.event-details-title {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
 .back-button {
   background: none;
   border: none;
-  color: #007bff;
-  font-size: 1rem;
+  color: white;
+  font-size: 1.1rem;
   cursor: pointer;
-  padding: 0.5rem 0;
-  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  transition: all 0.2s ease;
 }
 
 .back-button:hover {
   text-decoration: underline;
+  transform: translateX(-2px);
+}
+
+.event-details-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+  flex: 1;
 }
 
 .event-title {
@@ -129,21 +167,6 @@
 
 .register-button:hover {
   background-color: #0056b3;
-}
-
-.event-details-header {
-  background-color: #2c3e50;
-  color: white;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.event-details-title {
-  margin: 0;
-  font-size: 1.5rem;
 }
 
 .event-details-content {

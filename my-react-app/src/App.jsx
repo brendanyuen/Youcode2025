@@ -5,6 +5,7 @@ import UserProfile from './components/UserProfile';
 import Events from './components/Events';
 import EventDetails from './components/EventDetails';
 import FriendsEvents from './components/FriendsEvents';
+import Profile from './components/Profile';
 import './App.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile-setup" element={<UserProfile />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/events" element={<Events />} />
         <Route path="/events/:eventId" element={<EventDetails />} />
         <Route path="/friends-events" element={<FriendsEvents />} />

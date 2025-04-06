@@ -1,9 +1,16 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import TabNavigation from './TabNavigation';
 import './FriendsEvents.css';
 
 const FriendsEvents = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const username = location.state?.username || 'Guest';
+
+  const handleLogout = () => {
+    navigate('/login');
+  };
 
   // Hardcoded data for friends and events
   const friends = [
@@ -47,49 +54,59 @@ const FriendsEvents = () => {
 
   return (
     <div className="friends-events-page">
-      {/* Black banner header copied from the Events page */}
-      <header className="events-header">
-        <h1 className="events-title">Friends' Events</h1>
+      <header className="friends-events-header">
+        <div className="header-top">
+          <div className="header-left">
+            <h1 className="friends-events-title">Friends' Events</h1>
+          </div>
+          <div className="user-info">
+            <span className="user-name">Welcome, {username}</span>
+            <button className="logout-button" onClick={handleLogout}>Logout</button>
+          </div>
+        </div>
+        <TabNavigation />
       </header>
 
-      <div className="friends-list">
-        {friends.map((friend, index) => (
-          <div key={index} className="friend-profile">
-            <div className="friend-info">
-              <img
-                src={friend.image}
-                alt={friend.name}
-                className="friend-image"
-              />
-              <h3 className="friend-name">{friend.name}</h3>
-            </div>
-            <div className="friend-events">
-              <h4>Events:</h4>
-              {friend.events.map((event, eventIndex) => (
-                <div key={eventIndex} className="friend-event">
-                  <div className="event-info">
-                    <p>{event.title} - {event.date}</p>
+      <div className="friends-events-section">
+        <div className="friends-list">
+          {friends.map((friend, index) => (
+            <div key={index} className="friend-profile">
+              <div className="friend-info">
+                <img
+                  src={friend.image}
+                  alt={friend.name}
+                  className="friend-image"
+                />
+                <h3 className="friend-name">{friend.name}</h3>
+              </div>
+              <div className="friend-events">
+                <h4>Events:</h4>
+                {friend.events.map((event, eventIndex) => (
+                  <div key={eventIndex} className="friend-event">
+                    <div className="event-info">
+                      <p>{event.title} - {event.date}</p>
+                    </div>
+                    <div className="event-buttons">
+                      <button
+                        className="details-button"
+                        onClick={() => handleViewDetails(event.title)}
+                      >
+                        Details
+                      </button>
+                      <button
+                        className="join-event-button"
+                        onClick={() => handleJoinEvent(friend.name, event.title)}
+                      >
+                        Join
+                      </button>
+                    </div>
+                    {eventIndex < friend.events.length - 1 && <hr />}
                   </div>
-                  <div className="event-buttons">
-                    <button
-                      className="details-button"
-                      onClick={() => handleViewDetails(event.title)}
-                    >
-                      Details
-                    </button>
-                    <button
-                      className="join-event-button"
-                      onClick={() => handleJoinEvent(friend.name, event.title)}
-                    >
-                      Join
-                    </button>
-                  </div>
-                  {eventIndex < friend.events.length - 1 && <hr />}
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

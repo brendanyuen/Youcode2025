@@ -13,13 +13,41 @@ app.get('/api/events', async (req, res) => {
     const { type = 'Outdoor', city = 'Vancouver', date = '' } = req.query;
     
     // Construct the query string
-    let query = 'outdoor activities';
+    let query = '';
     if (type) {
       query += ` ${type}`;
     }
     query += ` in ${city}`;
+    
+    // Handle date ranges
+    let htichips = '';
     if (date) {
-      query += ` ${date}`;
+      switch (date) {
+        case 'date:today':
+          htichips = 'date:today';
+          break;
+        case 'date:tomorrow':
+          htichips = 'date:tomorrow';
+          break;
+        case 'date:week':
+          htichips = 'date:week';
+          break;
+        case 'date:weekend':
+          htichips = 'date:weekend';
+          break;
+        case 'date:next_week':
+          htichips = 'date:next_week';
+          break;
+        case 'date:month':
+          htichips = 'date:month';
+          break;
+        case 'date:next_month':
+          htichips = 'date:next_month';
+          break;
+        default:
+          // If no valid date is selected, don't add anything to the query
+          break;
+      }
     }
 
     const response = await axios.get('https://serpapi.com/search.json', {
@@ -28,6 +56,7 @@ app.get('/api/events', async (req, res) => {
         q: query,
         hl: 'en',
         gl: 'ca',
+        htichips: htichips,
         api_key: '0efa7c4fae942e7cec720c24585d719d89e29fda1f210723a7f5255c64cc068c'
       }
     });
