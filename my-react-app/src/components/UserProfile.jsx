@@ -83,23 +83,32 @@ const UserProfile = () => {
     e.preventDefault();
     
     if (validateForm()) {
-      // In a real app, you would save this data to a backend
-      console.log('Profile data:', { ...formData, username });
-      
-      // Navigate to the events screen
-      navigate('/events');
+      navigate('/events', { 
+        state: { 
+          username,
+          profileData: formData
+        } 
+      });
     }
   };
 
   return (
-    <div className="profile-container">
-      <div className="profile-wrapper">
-        <div className="profile-header">
-          <h1 className="profile-title">Complete Your Profile</h1>
-          <p className="profile-subtitle">Tell us a bit about yourself</p>
+    <div className="profile-setup-page">
+      <header className="profile-setup-header">
+        <div className="header-top">
+          <div className="header-left">
+            <h1 className="profile-setup-title">Complete Your Profile</h1>
+          </div>
         </div>
-        
-        <div className="profile-content">
+      </header>
+
+      <div className="profile-setup-content">
+        <div className="profile-setup-card">
+          <div className="profile-setup-header-section">
+            <h2>Tell us a bit about yourself</h2>
+            <p className="profile-subtitle">This information will help us find events that match your interests</p>
+          </div>
+          
           <form onSubmit={handleSubmit} className="profile-form">
             <div className="form-row">
               <div className="form-group">

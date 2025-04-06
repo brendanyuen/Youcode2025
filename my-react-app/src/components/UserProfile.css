@@ -1,43 +1,80 @@
-.profile-container {
+.profile-setup-page {
   min-height: 100vh;
-  width: 100%;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  /* padding-top: 100px; */
+  margin-top:100px;
+}
+
+.profile-setup-header {
+  background-color: #000;
+  color: white;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-left {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: #f5f5f5;
-  padding: 2rem; /* Keep padding for spacing but allow the form to be wider */
+  gap: 1.5rem;
+  margin-left: 2rem;
 }
 
-.profile-wrapper {
-  width: 100%;
-  max-width: 100%; /* Allow the form to take up full width */
-  background-color: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.profile-header {
-  background-color: black;
-  color: white;
-  padding: 2.5rem;
-  text-align: center;
-}
-
-.profile-title {
-  font-size: 2.5rem;
-  font-weight: bold;
+.profile-setup-title {
   margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.profile-setup-content {
+  flex: 1;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+  margin-top: 8px; /* Reduced from 120px to bring content closer to header */
+}
+
+.profile-setup-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profile-setup-header-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profile-setup-header-section h2 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+  font-size: 1.8rem;
 }
 
 .profile-subtitle {
-  color: rgba(255, 255, 255, 0.8);
-  margin-top: 0.5rem;
-  font-size: 1.2rem;
-}
-
-.profile-content {
-  padding: 2.5rem;
+  color: #666;
+  font-size: 1.1rem;
+  margin: 0;
 }
 
 .profile-form {
@@ -48,7 +85,7 @@
 
 .form-row {
   display: flex;
-  gap: 7rem;
+  gap: 2rem;
 }
 
 .form-group {
@@ -60,7 +97,7 @@
 
 .form-group label {
   font-weight: 500;
-  color: #333;
+  color: #2c3e50;
   font-size: 1.1rem;
 }
 
@@ -74,24 +111,24 @@
 
 .form-group input:focus {
   outline: none;
-  border-color: black;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
 }
 
 .form-group input.error {
-  border-color: #d32f2f;
+  border-color: #e74c3c;
 }
 
 .error-message {
-  color: #d32f2f;
-  font-size: 1rem;
+  color: #e74c3c;
+  font-size: 0.9rem;
   margin-top: 0.25rem;
 }
 
 .activities-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
   margin-top: 1rem;
 }
 
@@ -106,13 +143,13 @@
 }
 
 .activity-option:hover {
-  border-color: #999;
-  background-color: #f9f9f9;
+  border-color: #3498db;
+  background-color: rgba(52, 152, 219, 0.05);
 }
 
 .activity-option.selected {
-  border-color: black;
-  background-color: rgba(0, 0, 0, 0.05);
+  border-color: #3498db;
+  background-color: rgba(52, 152, 219, 0.1);
 }
 
 .activity-checkbox {
@@ -130,12 +167,12 @@
 
 .form-actions {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 .submit-button {
-  background-color: black;
+  background-color: #3498db;
   color: white;
   border: none;
   padding: 1rem 2rem;
@@ -147,16 +184,12 @@
 }
 
 .submit-button:hover {
-  background-color: #333;
+  background-color: #2980b9;
   transform: translateY(-2px);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .profile-container {
-    padding: 2rem;
-  }
-
   .form-row {
     flex-direction: column;
     gap: 1rem;
@@ -165,26 +198,8 @@
   .activities-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
-}
 
-@media (max-width: 480px) {
-  .profile-header {
-    padding: 1.5rem;
-  }
-
-  .profile-content {
-    padding: 1.5rem;
-  }
-
-  .profile-title {
-    font-size: 1.8rem;
-  }
-
-  .profile-subtitle {
-    font-size: 1rem;
-  }
-
-  .activities-grid {
-    grid-template-columns: 1fr;
+  .profile-setup-content {
+    padding: 1rem;
   }
 }
