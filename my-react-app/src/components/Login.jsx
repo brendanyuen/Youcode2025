@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import LogoWhite from '../assets/Full-logo-white.png'; // Adjust the path as necessary
 
 const Login = () => {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ const Login = () => {
         <div className="login-banner">
           <div className="banner-content">
             <div className="logo-placeholder">
-              {/* Add your logo here */}
+              <img src={LogoWhite} alt="Logo" style={{ width: '100%', height: 'auto' }} />
             </div>
             <h1 className="title">Welcome to YouCode</h1>
             <p className="subtitle">Your Gateway to Learning</p>
