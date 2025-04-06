@@ -99,13 +99,13 @@ const Profile = () => {
           <h3>Upcoming Events</h3>
           <div className="upcoming-events">
             <div className="event-item">
-              <h4>Beach Cleanup</h4>
-              <p>Saturday, April 15, 2024</p>
-              <p>English Bay Beach</p>
+              <h4>STRAVA RUN STEADY CHALLENGE: Spray River Loop Banff</h4>
+              <p>Saturday, April 26</p>
+              <p>123 Banff Ave, Banff, AB</p>
             </div>
             <div className="event-item">
               <h4>Hiking Trip</h4>
-              <p>Sunday, April 16, 2024</p>
+              <p>Sunday, April 16</p>
               <p>Grouse Mountain</p>
             </div>
           </div>
