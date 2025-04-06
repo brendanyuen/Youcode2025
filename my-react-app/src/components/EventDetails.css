@@ -59,38 +59,44 @@
 }
 
 .event-details-container {
-  max-width: 1200px;
-  margin: 0 auto;
+  margin-top: 120px;
   padding: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
   width: 100%;
-  flex: 1;
 }
 
 .event-title {
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: 2.5rem;
   color: #333;
+  margin-bottom: 2rem;
+}
+
+.event-details-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .event-image-container {
-  margin-bottom: 2rem;
-  border-radius: 8px;
+  width: 100%;
+  height: 400px;
   overflow: hidden;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
+  border-radius: 8px;
+  margin-bottom: 2rem;
 }
 
 .event-details-image {
   width: 100%;
-  height: auto;
-  max-height: 200px;
+  height: 100%;
   object-fit: cover;
 }
 
 .event-info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr 2fr;
   gap: 2rem;
   margin-bottom: 2rem;
 }
@@ -119,6 +125,108 @@
   color: #666;
 }
 
+.event-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.register-button,
+.share-button {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.register-button {
+  background-color: #000;
+  color: white;
+}
+
+.share-button {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.register-button:hover,
+.share-button:hover {
+  transform: translateY(-1px);
+}
+
+.register-button:hover {
+  background-color: #333;
+}
+
+.share-button:hover {
+  background-color: #e0e0e0;
+}
+
+.error {
+  text-align: center;
+  padding: 2rem;
+}
+
+.error h2 {
+  color: #d32f2f;
+  margin-bottom: 1rem;
+}
+
+.error p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.error .back-button {
+  background-color: #000;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+}
+
+.error .back-button:hover {
+  background-color: #333;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .event-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .event-image-container {
+    height: 300px;
+  }
+
+  .event-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .event-details-container {
+    padding: 1rem;
+    margin-top: 100px;
+  }
+
+  .event-details-content {
+    padding: 1rem;
+  }
+
+  .event-actions {
+    flex-direction: column;
+  }
+
+  .register-button,
+  .share-button {
+    width: 100%;
+  }
+}
+
 .ticket-info-section {
   margin-top: 1rem;
 }
@@ -133,7 +241,7 @@
 .ticket-link {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background-color: #007bff;
+  background-color: #000;
   color: white;
   text-decoration: none;
   border-radius: 4px;
@@ -142,150 +250,129 @@
 }
 
 .ticket-link:hover {
-  background-color: #0056b3;
+  background-color: #333;
+  text-decoration: none;
 }
 
-.event-actions {
-  display: flex;
-  justify-content: center;
+.event-info-section a {
+  color: white;
+  text-decoration: none;
+  background-color: #000;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  display: inline-block;
+  transition: all 0.2s;
+}
+
+.event-info-section a:hover {
+  background-color: #333;
+  color: white;
+}
+
+.recommended-gear-section {
   margin-top: 2rem;
-}
-
-.register-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
+  padding: 2rem;
+  background: #f8f9fa;
   border-radius: 8px;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  text-decoration: none;
 }
 
-.register-button:hover {
-  background-color: #0056b3;
-}
-
-.event-details-content {
-  padding: 2rem;
-}
-
-.event-details-content h2 {
-  margin: 0 0 1rem;
-  color: #2c3e50;
-  font-size: 2rem;
-}
-
-.event-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  color: #666;
-}
-
-.event-description {
-  line-height: 1.6;
-  color: #444;
-  margin-bottom: 2rem;
-}
-
-.event-button {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  text-align: center;
-}
-
-.event-button:first-child {
-  background-color: #3498db;
-  color: white;
-}
-
-.event-button:last-child {
-  background-color: #f8f9fa;
-  color: #2c3e50;
-  border: 1px solid #ddd;
-}
-
-.event-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.weather-card {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  height: fit-content;
-}
-
-.weather-card h3 {
-  margin: 0 0 1rem;
-  color: #2c3e50;
-}
-
-.weather-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.weather-main {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.weather-icon {
-  font-size: 2rem;
-}
-
-.weather-temp {
+.recommended-gear-section h2 {
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #2c3e50;
+  color: #333;
+  margin-bottom: 1.5rem;
 }
 
-.weather-details p {
-  margin: 0;
-  color: #666;
+.gear-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
 }
 
-.loading, .error {
-  text-align: center;
-  padding: 2rem;
+.gear-item {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.gear-image-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.gear-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gear-item:hover .gear-image {
+  transform: scale(1.05);
+}
+
+.gear-item h3 {
   font-size: 1.2rem;
-  color: #666;
+  color: #333;
+  margin-bottom: 0.5rem;
 }
 
-.error {
-  color: #e74c3c;
+.gear-description {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.gear-price {
+  color: #000;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.gear-link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #000;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.gear-link:hover {
+  background-color: #333;
+  color: white;
+  text-decoration: none;
 }
 
 @media (max-width: 768px) {
-  .event-details-container {
+  .gear-grid {
     grid-template-columns: 1fr;
-    padding: 0 1rem;
   }
+  
+  .recommended-gear-section {
+    padding: 1.5rem;
+  }
+}
 
-  .event-image-container {
-    height: 300px;
-  }
+.analyzing-message {
+  text-align: center;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
 
-  .event-actions {
-    flex-direction: column;
-  }
-
-  .event-button {
-    width: 100%;
-  }
+.analyzing-message p {
+  color: #666;
+  font-size: 1.1rem;
+  margin: 0;
 } 

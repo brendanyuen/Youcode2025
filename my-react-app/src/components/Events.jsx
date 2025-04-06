@@ -28,6 +28,12 @@ const Events = () => {
   const location = useLocation();
   const username = location.state?.username || 'Guest';
 
+  // Create a unique key for each event
+  const createEventKey = (event, index) => {
+    if (event.id) return event.id;
+    return `event-${index}-${Date.now()}`;
+  };
+
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -44,13 +50,54 @@ const Events = () => {
         }
         const data = await response.json();
         
-        // Validate the data structure
         if (!data.events_results || !Array.isArray(data.events_results)) {
           setEvents([]);
           return;
         }
 
-        const limitedEvents = data.events_results.slice(0, 4);
+        // Add IDs to API events
+        const limitedEvents = data.events_results.slice(0, 4).map((event, index) => ({
+          ...event,
+          id: `api-event-${index}-${Date.now()}`
+        }));
+        
+        // Always include the Arc'teryx Banff event
+        const arcTeryxEvent = {
+          id: `arc-teryx-banff-${Date.now()}`,
+          title: "Arc'teryx Banff Grand Opening Celebration!",
+          date: { when: "2024-04-12" },
+          address: "123 Main St, Banff, AB",
+          description: "Big news, Banff. We're bringing world-class gear to world-class terrain - Arc'teryx Banff opens Spring 2025! A big announcement deserves a big celebration! Join us for our Grand Opening Day celebration, we promise a day full of community, music, refreshments and some special surprises in store!",
+          thumbnail: "https://d3m889aznlr23d.cloudfront.net/img/events/id/459/459136409/assets/34dbcc0f0cdd3d58c3e8f32f370dac4c.JS_03883.jpg",
+          website: "https://community-events.arcteryx.com/arcteryxbanffgrandopening",
+          ticket_info: [
+            {
+              source: "Community Events",
+              link: "https://community-events.arcteryx.com/arcteryxbanffgrandopening"
+            }
+          ]
+        };
+
+        const arcTeryxEvent2 = {
+          id: `strava-run-steady-${Date.now()}`,
+          title: "STRAVA RUN STEADY CHALLENGE: Spray River Loop Banff",
+          date: { when: "2024-04-26" },
+          address: "123 Banff Ave, Banff, AB",
+          description: "rails for a 6.5 KM run on Spray River Loop, Saturday April 26th at 8AM. Co-presented with our friends from Minotaur Sky Race! Arc'teryx believes that no matter where you go or how you got there, getting outside is good for your body and mind. Whether your chasing a summit in the high alpine or hitting the trails after work, building a steady routine can be inspiring.",
+          thumbnail: "https://d3m889aznlr23d.cloudfront.net/img/events/id/459/459167681/assets/a48ded161d500ad488c11c8d2bb1985d.25_Arc_StravaRunSteady_RedemptionPage-1200x800-en.jpg",
+          website: "https://community-events.arcteryx.com/stravarunsteadychallengebmf25",
+          ticket_info: [
+            {
+              source: "Community Events",
+              link: "https://community-events.arcteryx.com/stravarunsteadychallengebmf25"
+            }
+          ]
+        };
+
+        // Add the Arc'teryx events to the beginning of the array
+        limitedEvents.unshift(arcTeryxEvent);
+        limitedEvents.unshift(arcTeryxEvent2);
+
         setEvents(limitedEvents);
       } catch (err) {
         setError(err.message);
@@ -75,8 +122,14 @@ const Events = () => {
     setAppliedFilters(filters);
   };
 
-  const handleEventClick = (event, index) => {
-    navigate(`/events/${index}`, { state: { event } });
+  const handleEventClick = (event) => {
+    navigate(`/events/${event.id}`, { 
+      state: { 
+        event,
+        username,
+        profileData: location.state?.profileData || {}
+      } 
+    });
   };
 
   const handleLogout = () => {
@@ -136,13 +189,13 @@ const Events = () => {
             <p>Wind: {weather.windSpeed} km/h</p>
           </div>
         </div>
-        <h2 className="featured-events-title">Featured Events in Vancouver</h2>
+        <h2 className="featured-events-title">Upcoming Events</h2>
         <div className="events-grid">
-          {events.slice(0, 4).map((event, index) => (
+          {events.map((event, index) => (
             <div 
-              key={index} 
+              key={createEventKey(event, index)}
               className="event-card"
-              onClick={() => handleEventClick(event, index)}
+              onClick={() => handleEventClick(event)}
             >
               {event.thumbnail && (
                 <img src={event.thumbnail} alt={event.title} className="event-image" />
