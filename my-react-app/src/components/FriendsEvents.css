@@ -1,0 +1,141 @@
+/* Ensure the page fills the full screen width and height */
+.friends-events-page {
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background-color: #f5f5f5;
+    padding: 2rem;
+    box-sizing: border-box; /* Ensure padding does not affect overall width/height */
+    display: flex;
+    flex-direction: column;
+}
+
+.events-header {
+    background-color: black;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    width: 100%; /* Full width */
+}
+
+.events-title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.friends-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+    width: 100%; /* Ensure the list takes full width */
+    max-width: 100%; /* Prevent any width constraints */
+}
+
+.friend-profile {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Full width for each friend profile */
+    box-sizing: border-box;
+}
+
+.friend-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.friend-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.friend-name {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.friend-events {
+    margin-top: 1rem;
+    font-size: 2rem;
+    justify-items: left;
+    padding: 10px;
+}
+
+.friend-event {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.event-info {
+    font-size: 1.5rem;
+    color: #555;
+}
+
+.event-buttons {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.details-button,
+.join-event-button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.details-button:hover,
+.join-event-button:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}
+
+hr {
+    width: 90%; /* Fixed width of 90% of the screen */
+    margin: 1rem auto; /* Center the line and add vertical spacing */
+    border: 0;
+    border-top: 1px solid #ddd; /* Subtle line style */
+}
+
+/* Responsive Design: For mobile and tablet devices */
+@media (max-width: 768px) {
+    .friends-events-page {
+        padding: 1rem;
+    }
+
+    .events-header {
+        padding: 1rem;
+    }
+
+    .friend-profile {
+        padding: 1rem;
+    }
+
+    .friend-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .event-buttons {
+        flex-direction: column; /* Stack buttons on smaller screens */
+        gap: 1rem;
+        justify-items: right;
+    }
+
+    .details-button,
+    .join-event-button {
+        width: 100%;
+    }
+}
