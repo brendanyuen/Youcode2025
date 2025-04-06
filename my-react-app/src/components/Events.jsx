@@ -83,6 +83,10 @@ const Events = () => {
     navigate('/login'); // Navigate to the login page
   };
 
+  const handleFriendsEventsClick = () => {
+    navigate('/friends-events');
+  };
+
   if (loading) return <div className="loading">Loading events...</div>;
   if (error) return (
     <div className="error">
@@ -100,6 +104,11 @@ const Events = () => {
           <span className="user-name">Welcome, {username}</span>
           <button className="logout-button" onClick={handleLogout}>Logout</button>
         </div>
+        <button 
+          className="friends-events-button" 
+          onClick={handleFriendsEventsClick}>
+          View Friends' Events
+        </button>
       </header>
 
       <div className="events-section">
