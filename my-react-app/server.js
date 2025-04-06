@@ -13,11 +13,11 @@ app.get('/api/events', async (req, res) => {
     const { type = '', city = 'Vancouver', date = '' } = req.query;
     
     // Construct the query string
-    let query = '';
+    let query = 'outdoor activities';
     if (type) {
-      query += `${type} `;
+      query += ` ${type}`;
     }
-    query += `in ${city}`;
+    query += ` in ${city}`;
     if (date) {
       query += ` ${date}`;
     }

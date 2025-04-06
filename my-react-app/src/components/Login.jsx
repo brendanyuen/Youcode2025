@@ -30,7 +30,7 @@ const Login = () => {
     if (isLogin) {
       // Handle login logic here
       console.log('Login:', formData);
-      navigate('/events');
+      navigate('/events', { state: { username: formData.username } });
     } else {
       // Handle account creation and navigate to profile setup
       console.log('Create Account:', formData);

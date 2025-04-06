@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './components/Login';
 import UserProfile from './components/UserProfile';
 import Events from './components/Events';
+import EventDetails from './components/EventDetails';
 import './App.css';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/profile-setup" element={<UserProfile />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/events/:eventId" element={<EventDetails />} />
       </Routes>
     </Router>
   );

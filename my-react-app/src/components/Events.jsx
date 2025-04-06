@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Events.css';
 
-const Events = ({ username, onLogout }) => {
+const Events = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -24,6 +24,8 @@ const Events = ({ username, onLogout }) => {
     city: ''
   });
   const navigate = useNavigate();
+  const location = useLocation();
+  const username = location.state?.username || 'Guest';
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -73,7 +75,7 @@ const Events = ({ username, onLogout }) => {
   };
 
   const handleEventClick = (event, index) => {
-    navigate(`/events/${index}`);
+    navigate(`/events/${index}`, { state: { event } });
   };
 
   const handleLogout = () => {
