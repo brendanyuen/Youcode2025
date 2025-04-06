@@ -2,7 +2,7 @@ import Groq from "groq-sdk";
 
 const groq = new Groq({ apiKey: import.meta.env.VITE_GROQ_API_KEY, dangerouslyAllowBrowser: true });
 
-export async function analyzeEventDescription(description) {
+export async function analyzeEventDescription(description, title) {
   try {
     const chatCompletion = await groq.chat.completions.create({
       messages: [
@@ -12,7 +12,7 @@ export async function analyzeEventDescription(description) {
         },
         {
           role: "user",
-          content: `Analyze this event description and determine the primary activity type: ${description}`
+          content: `Analyze this event description and determine the primary activity type: ${description} + ${title}`
         }
       ],
       model: "llama-3.3-70b-versatile",

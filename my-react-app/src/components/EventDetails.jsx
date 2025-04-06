@@ -16,7 +16,7 @@ const EventDetails = () => {
     const determineActivityType = async () => {
       if (event?.description) {
         setIsAnalyzing(true);
-        const type = await analyzeEventDescription(event.description);
+        const type = await analyzeEventDescription(event.description, event.title);
         setActivityType(type);
         setIsAnalyzing(false);
       }

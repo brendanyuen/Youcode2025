@@ -8,11 +8,11 @@ const Events = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [weather, setWeather] = useState({
-    temperature: 18,
-    condition: 'Sunny',
-    icon: '☀️',
-    humidity: 65,
-    windSpeed: 12
+    temperature: 12,
+    condition: 'Rainy',
+    icon: '☔️',
+    humidity: 80,
+    windSpeed:9
   });
   const [filters, setFilters] = useState({
     type: '',
