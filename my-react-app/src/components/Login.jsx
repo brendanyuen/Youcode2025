@@ -53,13 +53,9 @@ const Login = () => {
           <div className="banner-content">
             <div className="logo-placeholder">
               <img src={LogoWhite} alt="Logo" style={{ width: '100%', height: 'auto' }} />
-            </div>
-<<<<<<< HEAD
-=======
-            <h1 className="title"></h1>
-            <p className="subtitle"></p>
->>>>>>> 1f0bad1 (final edits)
-          </div>
+
+        </div>
+        </div>
         </div>
         
         <div className="login-content">
