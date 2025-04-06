@@ -162,7 +162,7 @@ const Events = () => {
       <header className="events-header">
         <div className="header-top">
           <div className="header-left">
-            <h1 className="events-title">YouCode Events</h1>
+            <h1 className="events-title">Events</h1>
           </div>
           <div className="user-info">
             <span className="user-name">Welcome, {username}</span>

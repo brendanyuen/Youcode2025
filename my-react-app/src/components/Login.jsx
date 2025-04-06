@@ -54,8 +54,6 @@ const Login = () => {
             <div className="logo-placeholder">
               <img src={LogoWhite} alt="Logo" style={{ width: '100%', height: 'auto' }} />
             </div>
-            <h1 className="title">Welcome to YouCode</h1>
-            <p className="subtitle">Your Gateway to Learning</p>
           </div>
         </div>
         
