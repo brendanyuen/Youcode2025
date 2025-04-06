@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Events.css';
 
-const Events = ({ username, onLogout }) => {
+const Events = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -24,6 +24,8 @@ const Events = ({ username, onLogout }) => {
     city: ''
   });
   const navigate = useNavigate();
+  const location = useLocation();
+  const username = location.state?.username || 'Guest';
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -72,11 +74,8 @@ const Events = ({ username, onLogout }) => {
     setAppliedFilters(filters);
   };
 
-  const handleEventClick = (event) => {
-    // Store the event data in localStorage for the details page
-    localStorage.setItem('currentEvent', JSON.stringify(event));
-    // Navigate to the event details page
-    navigate(`/event/${event.title.replace(/\s+/g, '-').toLowerCase()}`);
+  const handleEventClick = (event, index) => {
+    navigate(`/events/${index}`, { state: { event } });
   };
 
   const handleLogout = () => {
@@ -121,7 +120,7 @@ const Events = ({ username, onLogout }) => {
             <div 
               key={index} 
               className="event-card"
-              onClick={() => handleEventClick(event)}
+              onClick={() => handleEventClick(event, index)}
             >
               {event.thumbnail && (
                 <img src={event.thumbnail} alt={event.title} className="event-image" />
@@ -149,7 +148,7 @@ const Events = ({ username, onLogout }) => {
                 name="type"
                 value={filters.type}
                 onChange={handleFilterChange}
-                placeholder="e.g., concert, festival"
+                placeholder="e.g., hiking, fishing, etc."
               />
             </div>
             <div className="filter-input">
